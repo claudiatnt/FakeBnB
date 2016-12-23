@@ -13,7 +13,8 @@
 		<div class="row center" id="user_button_container">
 			<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
 				<%if signed_in? %>
-					<p>Im signed in</p>
+					<%= link_to "Add A New Listing", new_listing_path, class: "btn btn-block btn-danger", id: "new_listing" %>
+					<%= link_to "Profile", user_path(current_user.id), class: "btn btn-block btn-primary", id: "profile" %>
 				<% else %>
 					<%= link_to "Sign In", sign_in_path, class: "btn btn-block btn-primary", id: "sign_in", remote: true %>
 					<%= link_to "Sign Up", sign_up_path, class: "btn btn-block btn-primary", id: "sign_up", remote: true %>
