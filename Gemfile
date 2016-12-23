@@ -28,6 +28,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 # Use clearance for user management
 gem 'clearance'
+# Use omniauth and omniauth-facebook to allow users to login with facebook
+gem 'omniauth'
+gem 'omniauth-facebook'
 # Use bootstap-sass gem to enable bootstrap and scss
 gem 'bootstrap-sass'
 # Use Capistrano for deployment

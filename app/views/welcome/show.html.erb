@@ -16,7 +16,8 @@
 					<p>Im signed in</p>
 				<% else %>
 					<%= link_to "Sign In", sign_in_path, class: "btn btn-block btn-primary", id: "sign_in", remote: true %>
-					<%=link_to "Sign Up", sign_up_path, class: "btn btn-block btn-primary", id: "sign_up", remote: true %>
+					<%= link_to "Sign Up", sign_up_path, class: "btn btn-block btn-primary", id: "sign_up", remote: true %>
+					<%= link_to "Sign in with Facebook", "/auth/facebook", id: "fb_sign_in" %>
 				<% end %>
 			</div>
 		</div>
