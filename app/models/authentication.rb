@@ -1,6 +1,6 @@
 class Authentication < ActiveRecord::Base
 
-	belongs_to :user
+	belongs_to :user, optional: true
 
 	def self.create_with_omniauth(auth_hash)
 		create! do |auth|
