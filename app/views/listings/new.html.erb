@@ -7,7 +7,7 @@
   </div>
   <div class="row">
     <div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
-      <%= form_for :listing do |form| %>
+      <%= form_for [@user, @listing] do |form| %>
         <div class="form-group">
           <%= form.label :title %>
           <%= form.text_field :title, class: "form-control" %>
@@ -52,7 +52,7 @@
             <%= form.date_field :availability_end, class: "form-control" %>
           </div>
         </div>
-        <%= fields_for :location do |location| %>
+        <%= form.fields_for :locations do |location| %>
           <div class="form-group">
             <%= location.label :address %>
             <%= location.text_field :address , class: "form-control" %>

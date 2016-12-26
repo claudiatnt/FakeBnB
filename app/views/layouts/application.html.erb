@@ -10,17 +10,9 @@
 
   <body>
 		<header>
-			<div
-			  class="fb-like"
-			  data-share="true"
-			  data-width="450"
-			  data-show-faces="true">
-			</div>
-
-			<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="true"></div>
-
 		  <% if signed_in? %>
 		      Signed in as: <%= current_user.email %>
+		      <%= link_to 'Home', root_path %>
 		      <%= button_to 'Sign out', sign_out_path, method: :delete %>
 		   <% end %>
 		</header>
@@ -32,7 +24,9 @@
 	      <% end %>
 	    </div>
 	    <!--Changes Depending on the page -->
-    	<%= yield %>
+	    <div class="container-fluid">
+    		<%= yield %>
+    	</div>
     </section>
   </body>
 </html>

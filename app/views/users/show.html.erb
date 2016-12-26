@@ -1,0 +1,28 @@
+<div class="row">
+	<div class="col-xs-12 col-md-12">
+		<h1 class="text-center"> User Profile </h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-4 col-md-4">
+		<h4 class="text-center">Email: <%= @user.email %></h4>
+	</div>
+</div><div class="row">
+	<div class="col-xs-4 col-md-4">
+		<h4 class="text-center">Gender: <%= @user.gender %></h4>
+	</div>
+</div><div class="row">
+	<div class="col-xs-4 col-md-4">
+		<h4 class="text-center">Age: <%= @user.age %></h4>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+		<%= link_to "Edit Profile", edit_user_path, class: "btn btn-block btn-primary" %>
+	</div>
+</div><br>
+<div class="row">
+	<div class="col-xs-4 cold-xs-offset-4 col-md-4 col-md-offset-4">
+	<%= link_to "Delete Profile", user_path(@user), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-block btn-danger" %>
+	</div>
+</div>

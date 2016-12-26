@@ -1,5 +1,7 @@
 class UsersController < Clearance::UsersController
 
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
+
   def new
     @user =  user_from_params
     respond_to do |format|
@@ -24,7 +26,32 @@ class UsersController < Clearance::UsersController
     end
   end
 
+  def show
+  end
+
+  def edit
+  end
+
+  def update
+    if @user.update(permit_params)
+      redirect_to @user
+    else
+      render 'edit'
+    end
+
+  end
+
+  def destroy
+    @user.destroy
+    redirect_to root_path
+  end
+
+
   private
+
+  def find_user
+    @user = User.find(params[:id])
+  end
 
   def user_from_params
     user_params = params[:user] || Hash.new
@@ -40,6 +67,8 @@ class UsersController < Clearance::UsersController
       user.gender = gender
     end
   end
+
+  private
 
   def permit_params
     params.require(:user).permit(:email, :password, :age, :gender)
