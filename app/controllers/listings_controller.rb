@@ -3,6 +3,10 @@ class ListingsController < ApplicationController
 	before_action :find_listing, only: [:show, :edit, :update, :destroy]
 	before_action :find_location, only: [:show, :edit, :update, :destroy]
 
+	def index
+		@listings.all
+	end
+
 	def new
 		@listing = @user.listings.new
 		@location = Location.new
@@ -24,7 +28,29 @@ class ListingsController < ApplicationController
 	end
 
 	def show
+	end
 
+	def edit
+	end
+
+	def update
+		byebug
+		if @listing.update(listing_params)
+			if @location.update(location_params)
+				redirect_to user_listing_path(@user, @listing.id)
+			else
+				render 'edit'
+			end
+		else
+			render 'edit'
+		end
+	end
+
+	def destroy
+		if @listing.destroy
+			@location.destroy
+			redirect_to root_path
+		end
 	end
 
 	private
@@ -34,7 +60,7 @@ class ListingsController < ApplicationController
 	end
 
 	def location_params
-		params.require(:listing)["locations"].permit(:address, :city, :state, :country)
+		params.require(:listing)["location"].permit(:address, :city, :state, :country)
 	end
 
 	def find_user
