@@ -55,7 +55,6 @@ class ListingsController < ApplicationController
   end
 
   def update
-    byebug
     if @listing.update(listing_params)
       if @location.update(location_params)
         redirect_to user_listing_path(@user, @listing.id)

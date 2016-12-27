@@ -1,0 +1,4 @@
+<% (1..@total_pages).each do |page|  %>
+	    	<%= link_to page, listings_path(page: page) %> &nbsp;
+	   	<% end %>
+	   	<%= link_to ">", listings_path(button: [movement: :up, page: params[:page]]) %>
