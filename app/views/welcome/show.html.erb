@@ -15,6 +15,7 @@
 				<%if signed_in? %>
 					<%= link_to "Add A New Listing", new_user_listing_path(current_user.id), class: "btn btn-block btn-danger", id: "new_listing" %>
 					<%= link_to "Profile", user_path(current_user.id), class: "btn btn-block btn-primary", id: "profile" %>
+					<%= link_to "Listings", user_listings_path(current_user.id), class: "btn btn-block btn-primary" %>
 				<% else %>
 					<%= link_to "Sign In", sign_in_path, class: "btn btn-block btn-primary", id: "sign_in", remote: true %>
 					<%= link_to "Sign Up", sign_up_path, class: "btn btn-block btn-primary", id: "sign_up", remote: true %>

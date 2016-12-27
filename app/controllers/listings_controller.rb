@@ -4,7 +4,7 @@ class ListingsController < ApplicationController
 	before_action :find_location, only: [:show, :edit, :update, :destroy]
 
 	def index
-		@listings.all
+		@listings = Listing.all.reverse
 	end
 
 	def new
