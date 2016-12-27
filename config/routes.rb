@@ -6,11 +6,11 @@ Rails.application.routes.draw do
     resource :password,
       controller: "clearance/passwords",
       only: [:create, :edit, :update]
-    resources :listings, controller: "listings"
+    resources :listings, controller: "listings", except: [:index]
   end
 
   resources :tags, controller: "tags", only: [ :create ]
-
+  get "/listings" => "listings#index", as: "listings"
   get "/sign_in" => "sessions#new", as: "sign_in"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
   get "/sign_up" => "users#new", as: "sign_up"

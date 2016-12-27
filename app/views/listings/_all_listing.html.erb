@@ -1,0 +1,45 @@
+<div class="row">
+	<% @listings.each do |listing| %>
+		<div class="col-xs-3 col-md-3">
+			<p class="text-center">
+				<%= link_to "#{listing.title}", user_listing_path(listing.user_id, listing.id) %>
+			</p>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<p class="text-center">
+				<%= truncate(listing.description, length: 50) %>
+			</p>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<p class="text-center">
+				<%= listing.price %>
+			</p>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<p class="text-center" >
+				<%= Location.find_by(listing_id: listing.id).country %>
+			</p>
+		</div>
+	<% end %>
+</div>
+<div class="row">
+	<div class="col-xs-4 col-md-4 pull-right">
+		<% if @current_page == 1 %>
+			<% (1..@total_pages).each do |page|  %>
+	    	<%= link_to page, listings_path(page: page) %> &nbsp;
+	   	<% end %>
+	   	<%= link_to ">", listings_path(button: [movement: :up, page: params[:page]]) %>
+	  <% elsif @current_page == @total_pages %>
+	 	 <%= link_to "<", listings_path(button: [movement: :down, page: params[:page]]	) %>
+	  	<% (1..@total_pages).each do |page|  %>
+	    	<%= link_to page, listings_path(page: page) %> &nbsp;
+	   	<% end %>
+	  <% else %>
+	  	<%= link_to "<", listings_path(button: [movement: :down, page: params[:page]]	) %>
+	  	<% (1..@total_pages).each do |page|  %>
+	    	<%= link_to page, listings_path(page: page) %> &nbsp;
+	   	<% end %>
+	   	<%= link_to ">", listings_path(button: [movement: :up, page: params[:page]]) %>
+	  <% end %>
+	</div>
+</div>
