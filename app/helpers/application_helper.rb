@@ -1,7 +1,11 @@
 module ApplicationHelper
 
-	def default_per_page
-		return 5
+	def listing_verified?
+		if self.verification == "unverified"
+			return false
+		else
+			return true
+		end
 	end
 
 end

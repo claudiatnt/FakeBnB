@@ -63,6 +63,16 @@
 			 </h4>
 			</h3>
 		</div>
+	</div>
+	<div class="row">
+		<%if !@listing.verification %>
+			<% @listing.unverified! %>
+		<% end %>
+		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Verification
+				<h4 class="listing-value text-center"><%= @listing.verification %></h4>
+			</h3>
+		</div>
 	</div><br>
 	<%if current_user.id == @listing.user_id %>
 	<div class="row">
