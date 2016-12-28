@@ -1,4 +1,4 @@
-$(function(){
+$(document).on('turbolinks:load', function(){
 	$(".listing-value").hide()
 	$("#listing-box").on("click",function(event){
 		x = $(event.target).parent()

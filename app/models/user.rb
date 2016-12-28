@@ -3,6 +3,10 @@ class User < ApplicationRecord
 
   enum role: [ :master, :admin, :user ]
   after_initialize :set_default_role, :if => :new_record?
+  after_initialize :set_default_image, :if => :new_record?
+
+  # CarrierWave to upload images
+  mount_uploader :avatar, AvatarUploader
 
   has_many :authentications, :dependent => :destroy
   has_many :listings
@@ -28,6 +32,11 @@ class User < ApplicationRecord
 
   def set_default_role
     self.role ||= :user
+  end
+
+  def set_default_image
+    file = File.join(Rails.root, 'app', 'assets', 'images', 'avatar-default.png')
+    self.avatar = File.open(file)
   end
 
 end
