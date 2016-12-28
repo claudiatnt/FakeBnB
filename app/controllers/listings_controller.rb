@@ -56,10 +56,14 @@ class ListingsController < ApplicationController
 
   def update
     if @listing.update(listing_params)
-      if @location.update(location_params)
+      if params[:listing]["location"].nil?
         redirect_to user_listing_path(@user, @listing.id)
       else
-        render 'edit'
+        if @location.update(location_params)
+          redirect_to user_listing_path(@user, @listing.id)
+        else
+          render 'edit'
+        end
       end
     else
       render 'edit'
@@ -76,11 +80,11 @@ class ListingsController < ApplicationController
   private
 
   def listing_params
-    params.require(:listing).permit(:title, :description, :rules, :bedroom, :bathroom, :price, :availability_start, :availability_end)
+    params.require(:listing).permit(:title, :description, :rules, :bedroom, :bathroom, :price, :availability_start, :availability_end, :verification)
   end
 
   def location_params
-    params.require(:listing)["location"].permit(:address, :city, :state, :country)
+    params.require(:listing)["location"].permit(:address, :city, :state, :country) unless params[:listing]["location"].nil?
   end
 
   def find_user
