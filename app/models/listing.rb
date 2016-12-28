@@ -6,6 +6,9 @@ class Listing < ApplicationRecord
 	has_many :tags, :through => :taggings
 	belongs_to :user
 
+	# Carrierwave
+	mount_uploaders :photos, PhotoUploader
+
 	# scope :page, Proc.new {|num|
 	# 	limit(default_per_page).offset(default_per_page * ([num.to_i, 1] - 1))
 	# }

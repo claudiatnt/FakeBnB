@@ -80,7 +80,7 @@ class ListingsController < ApplicationController
   private
 
   def listing_params
-    params.require(:listing).permit(:title, :description, :rules, :bedroom, :bathroom, :price, :availability_start, :availability_end, :verification)
+    params.require(:listing).permit(:title, :description, :rules, :bedroom, :bathroom, :price, :availability_start, :availability_end, :verification, { photos: [] })
   end
 
   def location_params
