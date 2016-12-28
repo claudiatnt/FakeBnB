@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227112456) do
+ActiveRecord::Schema.define(version: 20161228030742) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,11 +31,12 @@ ActiveRecord::Schema.define(version: 20161227112456) do
     t.integer  "bedroom"
     t.integer  "bathroom"
     t.integer  "price"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.date     "availability_start"
     t.date     "availability_end"
     t.integer  "user_id"
+    t.integer  "verification",       default: 0
     t.index ["user_id"], name: "index_listings_on_user_id", using: :btree
   end
 
