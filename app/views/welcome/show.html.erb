@@ -16,6 +16,9 @@
 					<%= link_to "Add A New Listing", new_user_listing_path(current_user.id), class: "btn btn-block btn-danger", id: "new_listing" %>
 					<%= link_to "Profile", user_path(current_user.id), class: "btn btn-block btn-primary", id: "profile" %>
 					<%= link_to "Listings", listings_path, class: "btn btn-block btn-primary" %>
+						<% if current_user.role != "user" %>
+							<%= link_to "Controller", master_path, class: "btn btn-block btn-default" %>
+						<% end %>
 				<% else %>
 					<%= link_to "Sign In", sign_in_path, class: "btn btn-block btn-primary", id: "sign_in", remote: true %>
 					<%= link_to "Sign Up", sign_up_path, class: "btn btn-block btn-primary", id: "sign_up", remote: true %>

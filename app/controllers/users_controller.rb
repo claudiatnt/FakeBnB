@@ -1,6 +1,11 @@
 class UsersController < Clearance::UsersController
 
   before_action :find_user, only: [:show, :edit, :update, :destroy]
+  before_action :authorize?, only: [:index]
+
+  def index
+    @users = User.all
+  end
 
   def new
     @user =  user_from_params
@@ -68,10 +73,15 @@ class UsersController < Clearance::UsersController
     end
   end
 
-  private
-
   def permit_params
-    params.require(:user).permit(:email, :password, :age, :gender)
+    params.require(:user).permit(:email, :password, :age, :gender, :role)
   end
 
+  def authorize?
+    if current_user.role == "user"
+      redirect_to root_path, alert: "Access Denied"
+    else
+      return true
+    end
+  end
 end

@@ -1,6 +1,9 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  enum role: [ :master, :admin, :user ]
+  after_initialize :set_default_role, :if => :new_record?
+
   has_many :authentications, :dependent => :destroy
   has_many :listings
 
@@ -21,6 +24,10 @@ class User < ApplicationRecord
 
   def password_optional?
   	true
+  end
+
+  def set_default_role
+    self.role ||= :user
   end
 
 end

@@ -9,6 +9,7 @@
 		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
 			<h3 class="btn btn-block btn-default">Title<br>
 				<h4 class="text-center"><%= @listing.title %></h4>
+				<h4 class="text-center"><%= link_to @listing.user.email, user_path(@listing.user_id) %></h4>
 			</h3>
 		</div>
 	</div>
