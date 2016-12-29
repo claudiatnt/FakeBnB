@@ -44,6 +44,9 @@ gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 # Use fog for cloud storing
 gem 'carrierwave-aws'
+# Use jquery-datetimepicker
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

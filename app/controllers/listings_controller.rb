@@ -8,7 +8,7 @@ class ListingsController < ApplicationController
     params[:page] = 1 unless params[:page]
     if params[:button].nil?
     	first_listing = (params[:page].to_i - 1 ) * listings_per_page
-    	listings = Listing.all
+    	listings = Listing.search(params[:search], params[:target])
     	@total_pages = listings.count / listings_per_page
     	@current_page = params[:page].to_i
     	if listings.count % listings_per_page > 0

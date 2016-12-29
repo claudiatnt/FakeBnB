@@ -1,0 +1,76 @@
+<div class="row">
+	<div class="col-xs-12 col-md-12">
+		<h1 class="text-center">
+			Make A Reservation
+		</h1>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-6 col-xs-offset-3 col-md-6 col-xs-offset-3">
+		<h3 class="text-center">
+			You are making a reservation for <%= link_to "#{@listing.title}", user_listing_path(@listing.user_id, @listing.id) %>
+		</h3>
+	</div>
+</div>
+<div class="row">
+	<div class= "col-xs-6 col-xs-offset-3 col-md-6 col-xs-offset-3">
+	<% if @listing.reservations.empty? %>
+		<h4 class="text-center">This listing currently has no reservations</h4>
+	<% else %>
+		<% @listing.reservations.each do |reservation| %>
+			<h4 class="text-center"> There is a reservation from <%= reservation.booking_start %> until <%= reservation.booking_end %>
+		<% end %>
+	<% end %>
+	</div>
+</div>
+<div class="row">
+	<div class="col-xs-6 col-xs-offset-3 col-md-6 col-xs-offset-3">
+		<h4 class="text-center">
+			Available from <%= @listing.availability_start %> untill <%= @listing.availability_end %>
+		</h4>
+	</div>
+</div>
+<div class="row">
+	<%= form_for @reservation do |form| %>
+		<div class="col-xs-4 col-xs-offset-2 col-md-4 col-md-offset-2">
+			<div class="form-group text-center">
+				<%= form.label "Booking Starts" %>
+				<%= form.date_field :booking_start, class: "form-control" %>
+			</div>
+		</div>
+		<div class="col-xs-4  col-md-4">
+			<div class="form-group text-center">
+				<%= form.label "Booking Ends" %>
+				<%= form.date_field :booking_end, class: "form-control" %>
+			</div>
+		</div>
+		<div class= "col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<%= form.hidden_field :listing_id, value: params[:listing_id] %>
+			<%= form.hidden_field :user_id, value: current_user.id %>
+			 	<%= form.submit "Reserve This Listing", class: "btn btn-primary btn-block" %>
+		</div>
+	<% end %>
+</div>
+<%= form_for @reservation do |form| %>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="form-group">
+				<div class="input-group date" id="datetimepicker1">
+				<%= form.text_field :booking_start, class: "form-control" %>
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar">
+					</span>
+				</span>
+				</div>
+			</div>
+			<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                	format: 'D/M/Y'
+                });
+            });
+        </script>
+		</div>
+	</div>
+<% end%>
+

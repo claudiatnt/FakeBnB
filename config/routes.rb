@@ -9,7 +9,10 @@ Rails.application.routes.draw do
     resources :listings, controller: "listings", except: [:index]
   end
 
+  resources :reservations
+
   resources :tags, controller: "tags", only: [ :create ]
+
   get "/listings" => "listings#index", as: "listings"
   get "/sign_in" => "sessions#new", as: "sign_in"
   delete "/sign_out" => "sessions#destroy", as: "sign_out"
