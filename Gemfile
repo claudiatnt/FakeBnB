@@ -42,6 +42,8 @@ gem 'figaro'
 gem 'carrierwave', '~> 1.0'
 # User minimagick to resize images
 gem 'mini_magick'
+# Use fog for cloud storing
+gem 'carrierwave-aws'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -16,20 +16,32 @@
 		  			<div class="navbar-header">
 		  				<%= link_to "Home", root_path, class: "navbar-brand" %>
 		  			</div>
-		  			<ul class="nav navbar-nav navbar-right">
-		  				<li>
-		  					<div id="avatar-container" class="text-center">
-		  						<% if current_user.avatar.file.nil? then current_user.set_default_image end %>
-		      				<%= image_tag current_user.avatar.thumb.url, id: "navatar" %>
-		      			</div>
-		  				</li>
-		  				<li>
-		  					<%= link_to current_user.email, user_path(current_user.id) %>
-							</li>
-							<li>
-		  					<%= link_to 'Sign out', sign_out_path, method: :delete %>
-		  				</li>
-		  			</ul>
+		  			<div class="collapse navbar-collapse" id="header-navlinks">
+		  				<ul class="nav navbar-nav">
+		  					<li>
+		  						<%= link_to "Listings", listings_path %>
+		  					</li>
+		  				</ul>
+		  				<ul class="nav navbar-nav navbar-right">
+		  					<li class="dropdown">
+		  						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		  							<div id="avatar-container" class="text-center">
+				  						<% if current_user.avatar.file.nil? then current_user.set_default_image end %>
+				      				<%= image_tag current_user.avatar.thumb.url, id: "navatar" %>
+				      			</div>
+				      		</a>
+		  						<ul class="dropdown-menu">
+				  					<li>
+				  						<%= link_to current_user.email, user_path(current_user.id) %>
+										</li>
+										<li>
+				  						<%= link_to 'Sign out', sign_out_path, method: :delete %>
+				  					</li>
+				  				</ul>
+
+			  				</li>
+		  				</ul>
+		  			</div>
 		  		</div>
 		  	</nav>
 		   <% end %>
