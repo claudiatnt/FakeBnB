@@ -19,6 +19,10 @@ before_action :find_reservation, only: [:show]
 
 	end
 
+	def checkout
+
+	end
+
 private
 
 def reservation_params
