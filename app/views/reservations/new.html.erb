@@ -51,26 +51,5 @@
 		</div>
 	<% end %>
 </div>
-<%= form_for @reservation do |form| %>
-	<div class="row">
-		<div class="col-md-4">
-			<div class="form-group">
-				<div class="input-group date" id="datetimepicker1">
-				<%= form.text_field :booking_start, class: "form-control" %>
-				<span class="input-group-addon">
-					<span class="glyphicon glyphicon-calendar">
-					</span>
-				</span>
-				</div>
-			</div>
-			<script type="text/javascript">
-            $(function () {
-                $('#datetimepicker1').datetimepicker({
-                	format: 'D/M/Y'
-                });
-            });
-        </script>
-		</div>
-	</div>
-<% end%>
+
 

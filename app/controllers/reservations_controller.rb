@@ -1,5 +1,6 @@
 class ReservationsController < ApplicationController
 before_action :find_listing, only: [:new, :create]
+before_action :find_reservation, only: [:show]
 
 	def new
 		@reservation = Reservation.new
@@ -8,10 +9,14 @@ before_action :find_listing, only: [:new, :create]
 	def create
 		@reservation = Reservation.new(reservation_params)
 		if @reservation.save
-			redirect_to user_listing_path(@listing.user_id, @listing.id)
+			redirect_to @reservation
 		else
 			render 'new'
 		end
+	end
+
+	def show
+
 	end
 
 private
@@ -22,6 +27,10 @@ end
 
 def find_listing
 	@listing = Listing.find_by_id(params[:listing_id])
+end
+
+def find_reservation
+	@reservation = Reservation.find_by_id(params[:id])
 end
 
 end
