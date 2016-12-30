@@ -50,6 +50,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 # Use braintree to get money
 gem 'braintree', "~> 2.69.1"
 
+
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri

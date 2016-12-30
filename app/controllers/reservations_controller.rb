@@ -16,7 +16,7 @@ before_action :find_reservation, only: [:show]
 	end
 
 	def show
-
+		@client_token = Braintree::ClientToken.generate
 	end
 
 	def checkout
