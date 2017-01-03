@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function(){
 
 	braintree.client.create({
 	  // Replace this with your own authorization.
-	  authorization: '<%= @client_token %>'
+	  authorization: $('.form-group').data('client')
 	}, function (clientErr, clientInstance) {
 	  if (clientErr) {
 	    // Handle error in client creation
