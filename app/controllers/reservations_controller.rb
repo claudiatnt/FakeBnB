@@ -12,7 +12,8 @@ before_action :find_reservation, only: [:show]
 			ReservationMailer.reservation_email(@listing.user)
 			redirect_to @reservation
 		else
-			render 'new'
+			flash[:notice] = "Reservation Failed"
+			redirect_to new_reservation_path(listing_id: params[:reservation][:listing_id])
 		end
 	end
 
