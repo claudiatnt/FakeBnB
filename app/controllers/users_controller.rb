@@ -10,7 +10,7 @@ class UsersController < Clearance::UsersController
   def new
     @user =  user_from_params
     respond_to do |format|
-      format.html {redirect_to "/sign_up"}
+      format.html {redirect_to sign_up_path}
       format.js
     end
   end
