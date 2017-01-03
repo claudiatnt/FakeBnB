@@ -1,0 +1,35 @@
+<div class="row">
+	<% @listings.each do |listing| %>
+		<div class="col-xs-3 col-md-3">
+			<p class="text-center">
+				<%= link_to "#{listing.title}", user_listing_path(listing.user_id, listing.id) %>
+			</p>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<p class="text-center">
+				<%= truncate(listing.description, length: 20) %>
+			</p>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<p class="text-center">
+				<%= listing.price %>
+			</p>
+		</div>
+		<div class="col-xs-3 col-md-3">
+			<p class="text-center" >
+				<%= Location.find_by(listing_id: listing.id).country %>
+			</p>
+		</div>
+	<% end %>
+</div>
+<div class="row">
+	<div class="col-xs-4 col-md-4 pull-right">
+		<% if @current_page == 1 %>
+			<%= render("first_page") %>
+	  <% elsif @current_page == @total_pages %>
+	 	 	<%= render("last_page") %>
+	  <% else %>
+	  	<%= render("middle_pages") %>
+	  <% end %>
+	</div>
+</div>

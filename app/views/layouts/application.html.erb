@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>FakeBnB</title>
+    <script src="https://js.braintreegateway.com/web/3.6.3/js/client.js"></script>
+			<script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.js"></script>
+
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+		<header>
+		  <% if signed_in? %>
+		  	<nav class="navbar navbar-default">
+		  		<div class="container-fluid">
+		  			<div class="navbar-header">
+		  				<%= link_to "Home", root_path, class: "navbar-brand" %>
+		  			</div>
+		  			<div class="collapse navbar-collapse" id="header-navlinks">
+		  				<ul class="nav navbar-nav">
+		  					<li>
+		  						<%= link_to "Listings", listings_path %>
+		  					</li>
+		  				</ul>
+		  				<ul class="nav navbar-nav navbar-right">
+		  					<li class="dropdown">
+		  						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+		  							<div id="avatar-container" class="text-center">
+				  						<% if current_user.avatar.file.nil? then current_user.set_default_image end %>
+				      				<%= image_tag current_user.avatar.thumb.url, id: "navatar" %>
+				      			</div>
+				      		</a>
+		  						<ul class="dropdown-menu">
+				  					<li>
+				  						<%= link_to current_user.email, user_path(current_user.id) %>
+										</li>
+										<li>
+				  						<%= link_to 'Sign out', sign_out_path, method: :delete %>
+				  					</li>
+				  				</ul>
+
+			  				</li>
+		  				</ul>
+		  			</div>
+		  		</div>
+		  	</nav>
+		   <% end %>
+		</header>
+    <section>
+
+	    <div id="flash">
+	      <% flash.each do |key, value| %>
+	        <div class="flash <%= key %>"><%= value %></div>
+	      <% end %>
+	    </div>
+	    <!--Changes Depending on the page -->
+	    <div class="container-fluid">
+    		<%= yield %>
+    	</div>
+    </section>
+  </body>
+</html>

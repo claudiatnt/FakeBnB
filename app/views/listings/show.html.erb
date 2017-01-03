@@ -1,0 +1,116 @@
+<div class="row">
+	<div class="col-md-12 col-xs-12">
+		<h1 class="text-center">Listing</h1>
+	</div>
+</div>
+<div id="listing-box">
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Title<br>
+				<h4 class="text-center"><%= @listing.title %></h4>
+				<h4 class="text-center"><%= link_to @listing.user.email, user_path(@listing.user_id) %></h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4 col-md-offset-4 col-md-4">
+			<h3 class="btn btn-block btn-default">Description<br>
+				<h4 class="listing-value text-center"><%= @listing.description %></h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4 col-xs-4 col-xs-offset-4">
+			<h3 class="btn btn-block btn-default">Rules<br>
+				<h4 class="listing-value text-center"><%= @listing.rules %></h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Price
+				<h4 class="listing-value text-center"><%= @listing.price %></h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Availability<br>
+				<h4 class="listing-value text-center"><%= @listing.availability_start %> - <%= @listing.availability_end %></h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4 col-xs-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Number of Bedroom<br>
+				<h4 class="listing-value text-center"><%= @listing.bedroom %></h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Number of Bathroom<br>
+				<h4 class="listing-value text-center"><%= @listing.bathroom %></h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Location
+			 <h4 class="listing-value text-center">
+			 		<%= @location.address %>, <%= @location.city %>, <%= @location.state %>, <%= @location.country %>
+			 </h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+	<!-- previously value was nil because it wasnt implemented -->
+		<%if !@listing.verification %>
+			<% @listing.unverified! %>
+		<% end %>
+		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Verification
+				<h4 class="listing-value text-center"><%= @listing.verification %></h4>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+			<h3 class="btn btn-block btn-default">Images
+				<h4 class="listing-value text-center">
+						<%= carousel_for(@listing.photos) %>
+				</h4>
+			</h3>
+		</div>
+	</div><br>
+	<!-- edit verification of listing -->
+	<% if current_user.role == "master" || current_user.role == "admin" %>
+		<div class="row">
+			<div class="col-xs-4 col-xs-offset-4 col-md-4 col-md-offset-4">
+				<%= form_for [@user, @listing] do |form| %>
+					<div class="form-group text-center">
+						<%= form.radio_button :verification, "unverified" %>
+						<%= form.label :verification, "Unverified" %>
+						<%= form.radio_button :verification, "verified" %>
+						<%= form.label :verification, "Verified" %>
+						<%= form.submit "Verify", class: "btn btn-block btn-primary" %>
+					</div>
+				<% end %>
+			</div>
+		</div>
+	<% end %>
+	<%if current_user.id == @listing.user_id %>
+	<div class="row">
+		<div class="col-xs-4 col-xs-4-offset col-md-4 col-md-offset-4">
+			<%= link_to "Edit Listing", edit_user_listing_path, class: "btn btn-block btn-primary" %>
+		</div>
+		<div class="col-xs-4 col-xs-4-offset col-md-4 col-md-offset-4">
+			<%= link_to "Delete Listing", user_listing_path, method: :delete, data: {confirmation: "Are you sure?"}, class: "btn btn-block btn-danger" %>
+		</div>
+	</div>
+	<% else %>
+		<div class="col-xs-4 col-xs-4-offset col-md-4 col-md-offset-4">
+			<%= link_to "Make A Reservation", new_reservation_path(listing_id: @listing.id), class: "btn btn-block btn-primary" %>
+		</div>
+	<% end %>
+</div>
