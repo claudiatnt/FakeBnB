@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-before_action :find_listing, only: [:new, :create]
+before_action :find_listing, only: [:new]
 before_action :find_reservation, only: [:show, :checkout]
 
 	def new
@@ -7,9 +7,10 @@ before_action :find_reservation, only: [:show, :checkout]
 	end
 
 	def create
+		@listing = Listing.find(params[:reservation][:listing_id])
 		@reservation = Reservation.new(reservation_params)
 		if @reservation.save
-			ReservationMailer.reservation_email(@listing.user)
+			ReservationEmailJob.perform_later(@listing, @listing.id, @reservation.id)
 			redirect_to @reservation
 		else
 			flash[:notice] = "Reservation Failed"
@@ -25,13 +26,12 @@ before_action :find_reservation, only: [:show, :checkout]
 		nonce_form_the_client = params[:checkout_form][:payment_method_nonce]
 
 		result = Braintree::Transaction.sale(
-			amount: "#{@reservation.listing.price}",
+			amount: "#{@reservation.listing.price / 10000 }",
 			payment_method_nonce: nonce_form_the_client,
 			options: {
 				submit_for_settlement: true
 			}
 			)
-
 		if result.success?
 			@reservation.update(payment_status: 1)
 			redirect_to :root, flash: { success: "Transaction successful!" }

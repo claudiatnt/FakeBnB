@@ -49,6 +49,8 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 # Use braintree to get money
 gem 'braintree', "~> 2.69.1"
+# asynchronous mailing
+gem 'sidekiq'
 
 
 
