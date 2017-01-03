@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-before_action :find_listing, only: [:new, :create]
+before_action :find_listing, only: [:new]
 before_action :find_reservation, only: [:show, :checkout]
 
 	def new
@@ -7,9 +7,11 @@ before_action :find_reservation, only: [:show, :checkout]
 	end
 
 	def create
+		@listing = Listing.find(params[:reservation][:listing_id])
 		@reservation = Reservation.new(reservation_params)
 		if @reservation.save
-			ReservationMailer.reservation_email(@listing.user, @listing.id, @reservation.id)
+			mail = ReservationMailer.reservation_email(@listing.user, @listing.id, @reservation.id)
+			mail.deliver_now
 			redirect_to @reservation
 		else
 			flash[:notice] = "Reservation Failed"
