@@ -10,8 +10,7 @@ before_action :find_reservation, only: [:show, :checkout]
 		@listing = Listing.find(params[:reservation][:listing_id])
 		@reservation = Reservation.new(reservation_params)
 		if @reservation.save
-			mail = ReservationMailer.reservation_email(@listing.user, @listing.id, @reservation.id)
-			mail.deliver_now
+			ReservationEmailJob.perform_later(@listing, @listing.id, @reservation.id)
 			redirect_to @reservation
 		else
 			flash[:notice] = "Reservation Failed"
@@ -33,7 +32,6 @@ before_action :find_reservation, only: [:show, :checkout]
 				submit_for_settlement: true
 			}
 			)
-		byebug
 		if result.success?
 			@reservation.update(payment_status: 1)
 			redirect_to :root, flash: { success: "Transaction successful!" }
