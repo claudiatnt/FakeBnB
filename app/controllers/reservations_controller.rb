@@ -25,13 +25,13 @@ before_action :find_reservation, only: [:show, :checkout]
 		nonce_form_the_client = params[:checkout_form][:payment_method_nonce]
 
 		result = Braintree::Transaction.sale(
-			amount: "#{@reservation.listing.price}",
+			amount: "#{@reservation.listing.price / 10000 }",
 			payment_method_nonce: nonce_form_the_client,
 			options: {
 				submit_for_settlement: true
 			}
 			)
-
+		byebug
 		if result.success?
 			@reservation.update(payment_status: 1)
 			redirect_to :root, flash: { success: "Transaction successful!" }
