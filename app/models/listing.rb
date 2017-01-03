@@ -1,5 +1,6 @@
 class Listing < ApplicationRecord
 
+# Enum roles
 	enum verification: [:unverified, :verified]
 
 # Associations-------------------------
