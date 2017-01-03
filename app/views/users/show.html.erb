@@ -60,12 +60,13 @@
 		<h1 class="text-center">My Listing</h1>
 	</div>
 </div>
-<% if @user.listings.nil? %>
+<% if @user.listings.empty? %>
 	<div class="row">
 		<div x=class="col-xs-12 col-md-12">
 		<h2 class="text-center">No Listings Yet</h2>
 		</div>
 	</div>
+	<br>
 <% else %>
 	<div class="row">
 		<div class="col-xs-4 col-xs-offset-2 col-md-4 col-md-offset-2">
@@ -82,6 +83,36 @@
 			</div>
 			<div class="col-xs-4  col-md-4 ">
 				<h5 class="text-center"><%= listing.verification %></h5>
+			</div>
+		<% end %>
+	</div>
+<% end %>
+<!-- Reservation Div -->
+<% if current_user.id == @user.id %>
+	<div>
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				<h1 class="text-center">
+					My Reservations
+				</h1>
+			</div>
+		</div>
+		<% if @user.reservations.empty? %>
+			<div class="col-xs-8 col-xs-offset-2 col-md-8 col-md-offset-2">
+				<h1 class="text-center">
+					No Reservations Yet
+				</h1>
+			</div>
+		<% else %>
+			<div class="row">
+			<% @user.reservations.each do |reservation| %>
+			<div class="col-xs-4 col-xs-offset-2 col-md-4 col-md-offset-2 text-center">
+				<%= link_to reservation.listing.title , reservation_path(reservation.id) %>
+			</div>
+			<div class="col-xs-4 col-md-4 text-center">
+				<%= reservation.payment_status %>
+			</div>
+			<% end %>
 			</div>
 		<% end %>
 	</div>
