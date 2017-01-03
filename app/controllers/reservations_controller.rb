@@ -9,7 +9,7 @@ before_action :find_reservation, only: [:show, :checkout]
 	def create
 		@reservation = Reservation.new(reservation_params)
 		if @reservation.save
-			ReservationMailer.reservation_email(@listing.user)
+			ReservationMailer.reservation_email(@listing.user, @listing.id, @reservation.id)
 			redirect_to @reservation
 		else
 			flash[:notice] = "Reservation Failed"
