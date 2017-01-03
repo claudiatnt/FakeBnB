@@ -9,6 +9,7 @@ before_action :find_reservation, only: [:show]
 	def create
 		@reservation = Reservation.new(reservation_params)
 		if @reservation.save
+			ReservationMailer.reservation_email(@listing.user)
 			redirect_to @reservation
 		else
 			render 'new'
