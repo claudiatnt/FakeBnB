@@ -51,6 +51,8 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.17.43'
 gem 'braintree', "~> 2.69.1"
 # asynchronous mailing
 gem 'sidekiq'
+# pg search forr full text search
+gem 'pg_search'
 
 
 

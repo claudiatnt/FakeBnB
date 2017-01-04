@@ -3,14 +3,13 @@
 		<h1 class="text-center">Browse Through Recent Listing</h1>
 	</div>
 </div>
-<%= form_for listings_path do |form| %>
+<%= form_for listings_path, method: :get do |form| %>
 	<div class="row">
 		<div class="col-xs-4 col-md-4">
 			<%= form.text_field :query %>
 		</div>
 		<div class="col-xs-4 col-md-4">
-			<%= form.select :query_target, grouped_options_for_select([["Price",
-   ['Below','Above']]]), {include_blank: "Pick Query"}, { :class=> "btn btn-block btn-default"} %>
+			<%= form.select :query_target, grouped_options_for_select(@select_options), {include_blank: "All Listing"}, { :class=> "btn btn-block btn-default"} %>
 		</div>
 	</div>
 	<div class="row">
